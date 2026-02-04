@@ -27,7 +27,7 @@ jobs:
     - name: Upload test reports
         if: always()
         run:
-          npx tdpw upload ./playwright-report --token="${{ secrets.TESTDINO_TOKEN }}"
+          npx tdpw upload ./playwright-report --token="trx_development_353c0a2e52b0e4ece2580131591640fd99520665be6274645d63a6c6be8edf67"
           --upload-full-json
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
