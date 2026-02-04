@@ -24,6 +24,11 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test
+    - name: Upload test reports
+        if: always()
+        run:
+          npx tdpw upload ./playwright-report --token="${{ secrets.TESTDINO_TOKEN }}"
+          --upload-full-json
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
