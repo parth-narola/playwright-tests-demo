@@ -23,7 +23,15 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 3,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html']],
+  reporter: [
+    ['html', { open: 'never' }],
+    // Streams results to TestDino. Token/serverUrl come from env so the same
+    // config works locally and in CI.
+    ['@testdino/playwright', {
+      token: process.env.TESTDINO_TOKEN || '',
+      serverUrl: process.env.TESTDINO_SERVER_URL || 'http://localhost:3005',
+    }],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */

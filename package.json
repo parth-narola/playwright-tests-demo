@@ -13,5 +13,8 @@
   "devDependencies": {
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.10.1"
+  },
+  "dependencies": {
+    "@testdino/playwright": "file:testdino-playwright-2.3.1.tgz"
   }
 }
