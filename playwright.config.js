@@ -23,14 +23,11 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 3,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  // TestDino reporter is injected by `tdpw test`; adding it here too would
+  // trip the CLI's duplicate-instance guard and silence reporting.
   reporter: [
-    ['html', { open: 'never' }],
-    // Streams results to TestDino. Token/serverUrl come from env so the same
-    // config works locally and in CI.
-    ['@testdino/playwright', {
-      token: process.env.TESTDINO_TOKEN || '',
-      serverUrl: process.env.TESTDINO_SERVER_URL || 'http://localhost:3005',
-    }],
+    ['html', { outputFolder: 'playwright-report', open: 'never' }],
+    ['json', { outputFile: 'report.json' }],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
